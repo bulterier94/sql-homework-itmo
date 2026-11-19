@@ -47,11 +47,20 @@ PostgreSQL подходит проекту, потому что данные и�
 
 ## 4. Smoke-тест
 
+Тест подключения к базе данных и наличия таблиц:
+<img width="1350" height="674" alt="psql_test" src="https://github.com/user-attachments/assets/8b40454b-8e98-4d14-9914-6936c3d01f2d" />
+
+Тест Adminer:
+<img width="713" height="439" alt="adminer_test" src="https://github.com/user-attachments/assets/ae5071dc-eeb7-49ed-9243-912cf8e0bf4d" />
 
 
 ## 5. Smoke-запросы
 
+Успешный запрос на добавление (см.  [`queries/smoke.sql`](`queries/smoke.sql)):
+<img width="1101" height="579" alt="smoke" src="https://github.com/user-attachments/assets/667763dd-bdb4-4711-9e16-83d3a0307a54" />
 
+Запрос с ошибкой (см.  [`queries/smoke.sql`](`queries/smoke.sql)):
+<img width="1544" height="260" alt="smoke_fail" src="https://github.com/user-attachments/assets/69a78a4a-6c52-421e-8a41-bf411677fb11" />
 
 ## 6. ДЗ, выбор первичных ключей
 
@@ -73,4 +82,6 @@ PostgreSQL подходит проекту, потому что данные и�
 
 
 ## 7. ДЗ, ER-диаграмма
+
+<img width="842" height="486" alt="image" src="https://github.com/user-attachments/assets/758af6d6-034c-46d7-9572-308263d9fa57" />
 
