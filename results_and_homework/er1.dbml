@@ -1,0 +1,23 @@
+Table app_user {
+  user_id bigint [pk, increment]
+  email text [not null, unique]
+  full_name text [not null]
+  created_at timestamptz [not null]
+}
+
+Table room {
+  room_id bigint [pk, increment]
+  code text [not null, unique]
+  capacity int [not null]
+  is_active boolean [not null]
+}
+
+Table booking {
+  booking_id bigint [pk, increment]
+  room_id bigint [not null, ref: > room.room_id]
+  user_id bigint [not null, ref: > app_user.user_id]
+  start_at timestamptz [not null]
+  end_at timestamptz [not null]
+  status text [not null]
+  created_at timestamptz [not null]
+}
