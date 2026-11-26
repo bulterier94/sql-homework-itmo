@@ -27,7 +27,7 @@ SELECT r.room_id, u.user_id, TIMESTAMPTZ '2026-12-01 10:00:00+02',
 FROM room r CROSS JOIN app_user u
 WHERE r.code = 'ROOM-1' AND u.email = 'alice@example.com';
 
--- DEFAULT: status должен автоматически стать confirmed
+-- status должен автоматически стать confirmed
 DO $$
 BEGIN
     IF (SELECT status FROM booking LIMIT 1) <> 'confirmed' THEN
@@ -36,7 +36,7 @@ BEGIN
     RAISE NOTICE 'OK: DEFAULT booking.status';
 END $$;
 
--- NOT NULL: email обязателен. Должен выдать not_null_violation
+-- email обязателен. Должен выдать not_null_violation (not_null)
 DO $$
 BEGIN
     BEGIN
@@ -47,7 +47,7 @@ BEGIN
     END;
 END $$;
 
--- UNIQUE: email не должен повторяться
+-- email не должен повторяться (unique)
 DO $$
 BEGIN
     BEGIN
@@ -58,7 +58,7 @@ BEGIN
     END;
 END $$;
 
--- CHECK: capacity > 0. Должен выдать check_violation
+-- capacity > 0. Должен выдать check_violation
 DO $$
 BEGIN
     BEGIN
@@ -69,7 +69,7 @@ BEGIN
     END;
 END $$;
 
--- CHECK: end_at > start_at. Должен выдать check_violation
+-- end_at > start_at. Должен выдать check_violation
 DO $$
 BEGIN
     BEGIN
@@ -84,7 +84,7 @@ BEGIN
     END;
 END $$;
 
--- FOREIGN KEY: отсутствующая комната недопустима
+-- отсутствующая комната недопустима (нет fk)
 DO $$
 BEGIN
     BEGIN
@@ -98,7 +98,7 @@ BEGIN
     END;
 END $$;
 
--- Составной PRIMARY KEY room_amenity запрещает дублировать пару
+-- room_amenity запрещает дублировать пару (дублирование pk)
 DO $$
 BEGIN
     BEGIN
@@ -111,7 +111,7 @@ BEGIN
     END;
 END $$;
 
--- CHECK: значение quantity должно быть положительно
+-- значение quantity должно быть положительно
 DO $$
 BEGIN
     BEGIN
@@ -124,7 +124,7 @@ BEGIN
     END;
 END $$;
 
--- EXCLUSION: активные брони одной комнаты не могут пересекаться
+-- активные брони одной комнаты не могут пересекаться
 DO $$
 BEGIN
     BEGIN
@@ -139,14 +139,14 @@ BEGIN
     END;
 END $$;
 
--- Бронь с 11:00 допустима, если предыдущая заканчивается в 11:00
+-- бронь с 11:00 допустима, если предыдущая заканчивается в 11:00
 INSERT INTO booking (room_id, user_id, start_at, end_at)
 SELECT r.room_id, u.user_id, TIMESTAMPTZ '2026-12-01 11:00:00+02',
        TIMESTAMPTZ '2026-12-01 12:00:00+02'
 FROM room r CROSS JOIN app_user u
 WHERE r.code = 'ROOM-1' AND u.email = 'bob@example.com';
 
--- ON DELETE RESTRICT: нельзя удалить пользователя с историей бронирований.
+-- нельзя удалить пользователя с историей бронирований (ON DELETE RESTRICT)
 DO $$
 BEGIN
     BEGIN
@@ -157,7 +157,7 @@ BEGIN
     END;
 END $$;
 
--- ON DELETE CASCADE: телефоны удаляются вместе с пользователем.
+-- телефоны удаляются вместе с пользователем (ON DELETE CASCADE)
 INSERT INTO app_user (email, full_name) VALUES ('charlie@example.com', 'Charlie Example');
 INSERT INTO user_phone (user_id, phone)
 SELECT user_id, '+358409876543' FROM app_user WHERE email = 'charlie@example.com';
@@ -177,4 +177,4 @@ UNION ALL SELECT 'amenity', count(*) FROM amenity
 UNION ALL SELECT 'room_amenity', count(*) FROM room_amenity
 UNION ALL SELECT 'user_phone', count(*) FROM user_phone;
 
-ROLLBACK; -- тестовые данные не сохраняются
+ROLLBACK;
