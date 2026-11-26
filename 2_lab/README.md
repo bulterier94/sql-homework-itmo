@@ -57,6 +57,7 @@ Email может измениться. Если бы он был PK, его из
 
 ## Результаты запуска
 
+<img width="793" height="563" alt="schema" src="https://github.com/user-attachments/assets/40b7cb32-6cc6-41d7-a70d-ecebaf504d5b" />
 
 ```
 $ docker exec -i course_db psql -v ON_ERROR_STOP=1 -U app -d coworking < schema.sql
@@ -85,6 +86,9 @@ COMMENT
 COMMENT
 ```
 
+<img width="952" height="785" alt="1_constraints" src="https://github.com/user-attachments/assets/be2e5fea-e6e2-4fad-a989-76a35706812f" />
+
+<img width="930" height="649" alt="2_constraints" src="https://github.com/user-attachments/assets/b949db03-f23a-4997-8470-923629ffeb37" />
 
 
 ```
