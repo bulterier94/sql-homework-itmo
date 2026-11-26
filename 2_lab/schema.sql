@@ -58,7 +58,6 @@ CREATE TABLE booking (
         CHECK (status IN ('pending', 'confirmed', 'cancelled', 'completed'))
 );
 
--- Активные брони одной комнаты не пересекаются
 ALTER TABLE booking ADD CONSTRAINT ex_booking_no_overlap
     EXCLUDE USING GIST (
         room_id WITH =,
