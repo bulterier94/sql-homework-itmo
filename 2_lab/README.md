@@ -25,6 +25,11 @@ docker exec -i course_db psql -v ON_ERROR_STOP=1 -U app -d coworking < schema.sq
 docker exec -i course_db psql -v ON_ERROR_STOP=1 -U app -d coworking < queries/02_constraints.sql
 ```
 
+3. Посмотреть содержимое таблицы:
+```bash
+docker exec -it course_db psql -U app -d coworking -c "SELECT * FROM app_user;"
+```
+
 В выводе ожидаются сообщения `NOTICE: OK: ...`. Негативные тесты перехватывают ожидаемые ошибки, поэтому весь файл продолжает выполняться. В конце выводится количество строк. Файл тестов заканчивается `ROLLBACK`, поэтому тестовые данные не сохраняются.
 
 `schema.sql` также удаляет одноименные таблицы перед созданием. При уже существующем Docker volume изменения `init.sql` не применяются автоматически. Для этого нужно использовать явный запуск `schema.sql`.
