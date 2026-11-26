@@ -59,7 +59,6 @@ CREATE TABLE booking (
 );
 
 -- Активные брони одной комнаты не пересекаются
--- Диапазон [start,end) позволяет одной броне начаться ровно в момент окончания другой
 ALTER TABLE booking ADD CONSTRAINT ex_booking_no_overlap
     EXCLUDE USING GIST (
         room_id WITH =,
